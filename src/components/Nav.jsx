@@ -5,6 +5,11 @@ const LINKS = [
   { to: '/', label: 'Home' },
   { to: '/about', label: 'About' },
   { to: '/services', label: 'Services' },
+  { to: '/industries', label: 'Industries' },
+  { to: '/gigs', label: 'Gigs' },
+  { to: '/portfolio', label: 'Portfolio' },
+  { to: '/blog', label: 'Blog' },
+  { to: '/careers', label: 'Careers' },
   { to: '/contact', label: 'Contact' },
 ];
 
@@ -27,7 +32,7 @@ export default function Nav() {
         right: 0,
         zIndex: 100,
         transition: 'background 0.4s ease, border-color 0.4s ease',
-        background: scrolled ? 'rgba(8,9,12,0.72)' : 'transparent',
+        background: scrolled ? 'rgba(8,9,12,0.78)' : 'transparent',
         backdropFilter: scrolled ? 'blur(16px)' : 'none',
         WebkitBackdropFilter: scrolled ? 'blur(16px)' : 'none',
         borderBottom: `1px solid ${scrolled ? 'rgba(255,255,255,0.08)' : 'transparent'}`,
@@ -39,7 +44,7 @@ export default function Nav() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          height: 76,
+          height: 72,
         }}
       >
         <Link
@@ -52,6 +57,7 @@ export default function Nav() {
             display: 'flex',
             alignItems: 'baseline',
             gap: 6,
+            flexShrink: 0,
           }}
         >
           BalanceBit
@@ -62,7 +68,7 @@ export default function Nav() {
 
         <div
           className="nav-links"
-          style={{ display: 'flex', alignItems: 'center', gap: 40 }}
+          style={{ display: 'flex', alignItems: 'center', gap: 24 }}
         >
           {LINKS.map((l) => (
             <NavLink
@@ -71,7 +77,8 @@ export default function Nav() {
               end={l.to === '/'}
               className="nav-link"
               style={({ isActive }) => ({
-                fontSize: 14,
+                fontSize: 13.5,
+                whiteSpace: 'nowrap',
                 color: isActive ? 'var(--brass)' : 'var(--text-dim)',
                 transition: 'color 0.25s ease',
               })}
@@ -79,7 +86,17 @@ export default function Nav() {
               {l.label}
             </NavLink>
           ))}
-          <Link to="/contact" className="btn btn-primary" style={{ padding: '10px 22px' }}>
+
+          <div style={{ width: 1, height: 20, background: 'var(--panel-line)' }} />
+
+          <Link
+            to="/client-hub"
+            style={{ fontSize: 13.5, color: 'var(--text-dim)', whiteSpace: 'nowrap' }}
+          >
+            Client Hub
+          </Link>
+
+          <Link to="/contact" className="btn btn-primary" style={{ padding: '9px 20px', fontSize: 13.5 }}>
             Start a project
           </Link>
         </div>
@@ -97,6 +114,7 @@ export default function Nav() {
             height: 40,
             color: 'var(--text)',
             fontSize: 18,
+            flexShrink: 0,
           }}
         >
           {open ? '✕' : '☰'}
@@ -109,10 +127,12 @@ export default function Nav() {
           style={{
             background: 'rgba(8,9,12,0.98)',
             borderTop: '1px solid var(--panel-line)',
-            padding: '24px 20px 32px',
+            padding: '20px 20px 32px',
             display: 'flex',
             flexDirection: 'column',
-            gap: 22,
+            gap: 18,
+            maxHeight: 'calc(100vh - 72px)',
+            overflowY: 'auto',
           }}
         >
           {LINKS.map((l) => (
@@ -121,11 +141,18 @@ export default function Nav() {
               to={l.to}
               end={l.to === '/'}
               onClick={() => setOpen(false)}
-              style={{ fontSize: 17, color: 'var(--text)' }}
+              style={{ fontSize: 16, color: 'var(--text)' }}
             >
               {l.label}
             </NavLink>
           ))}
+          <Link
+            to="/client-hub"
+            onClick={() => setOpen(false)}
+            style={{ fontSize: 16, color: 'var(--text)' }}
+          >
+            Client Hub
+          </Link>
           <Link
             to="/contact"
             onClick={() => setOpen(false)}
@@ -138,7 +165,7 @@ export default function Nav() {
       )}
 
       <style>{`
-        @media (max-width: 860px) {
+        @media (max-width: 1080px) {
           .nav-links { display: none !important; }
           .nav-toggle { display: flex !important; align-items: center; justify-content: center; }
         }

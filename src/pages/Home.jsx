@@ -1,5 +1,8 @@
 import { Link } from 'react-router-dom';
 import NetworkField from '../components/NetworkField';
+import { PROJECTS } from '../data/projects';
+
+const FEATURED = PROJECTS.slice(0, 3);
 
 const SERVICES = [
   { n: '01', title: 'Web Development', copy: 'Corporate sites, e-commerce, and custom platforms built for speed and scale.' },
@@ -196,6 +199,27 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ---------- FEATURED WORK ---------- */}
+      <section className="section container">
+        <div className="section-head" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 20 }}>
+          <div>
+            <div className="eyebrow">Our work</div>
+            <h2>Featured projects</h2>
+          </div>
+          <Link to="/portfolio" className="btn btn-ghost">View all projects</Link>
+        </div>
+
+        <div className="featured-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
+          {FEATURED.map((p) => (
+            <Link key={p.id} to={`/portfolio/${p.id}`} className="glass-panel project-card" style={{ padding: 28, display: 'block', transition: 'border-color 0.3s ease, transform 0.3s ease' }}>
+              <span className="tag">{p.category}</span>
+              <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 400, fontSize: 21, marginTop: 16 }}>{p.title}</h3>
+              <p style={{ marginTop: 10, fontSize: 13.5, color: 'var(--text-dim)', lineHeight: 1.6 }}>{p.summary}</p>
+            </Link>
+          ))}
+        </div>
+      </section>
+
       {/* ---------- CTA ---------- */}
       <section className="section container">
         <div
@@ -230,10 +254,12 @@ export default function Home() {
 
       <style>{`
         .service-card:hover { background: #171922 !important; }
+        .project-card:hover { border-color: var(--brass-dim) !important; transform: translateY(-3px); }
         @media (max-width: 900px) {
           .services-grid { grid-template-columns: 1fr !important; }
           .process-grid { grid-template-columns: 1fr 1fr !important; }
           .stats-grid { grid-template-columns: 1fr 1fr !important; row-gap: 32px; }
+          .featured-grid { grid-template-columns: 1fr !important; }
         }
         @media (max-width: 560px) {
           .process-grid { grid-template-columns: 1fr !important; }

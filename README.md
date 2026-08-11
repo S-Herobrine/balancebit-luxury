@@ -16,17 +16,36 @@ React, Vite, and Three.js.
 ```
 src/
   components/
-    Nav.jsx           sticky nav, mobile menu
+    Nav.jsx             sticky nav, mobile menu
     Footer.jsx
-    NetworkField.jsx   three.js hero background
+    NetworkField.jsx    three.js hero background
+    LoadingScreen.jsx   branded intro shown on first visit per session
+  data/
+    projects.js         portfolio project content
+    posts.js             blog post content
+    misc.js              industries + gigs content
   pages/
     Home.jsx
     About.jsx
     Services.jsx
+    Industries.jsx
+    Gigs.jsx
+    Portfolio.jsx / PortfolioDetail.jsx
+    Blog.jsx / BlogDetail.jsx
+    Careers.jsx
     Contact.jsx
-  App.jsx              routes
-  index.css            design tokens + global styles
+    ClientHub.jsx        login/signup UI (frontend-only, see note below)
+  App.jsx                routes (HashRouter)
+  index.css              design tokens + global styles
 ```
+
+### About the Client Hub page
+
+`ClientHub.jsx` is a working login/signup **interface** — forms, validation,
+loading state, success state — but it isn't connected to a real backend or
+database. There's a clearly marked `PLACEHOLDER_DASHBOARD_URL` constant at
+the top of that file and inline comments showing exactly where to plug in
+a real auth API call once one exists.
 
 ## Run it locally
 
